@@ -135,7 +135,19 @@ class MainActivity : AppCompatActivity() {
                 }
             },
         )
-
+        getTriggerInstance("adjustTrigger")?.run {
+            adjustAttach("t4", object : Trigger.Strike {
+                override fun strike() {
+                    Log.e("trigger", "t4")
+                    runOnUiThread {
+                        AlertDialog.Builder(this@MainActivity).setMessage("t4")
+                            .setOnDismissListener {
+                                next()
+                            }.show()
+                    }
+                }
+            }, true)
+        }
     }
 
     override fun onDestroy() {
